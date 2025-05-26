@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="telegram-app">
+<header class="custom-header">
+  <div class="logo-container">
+    <img src="icons/ton-logo.png" alt="Logo kaza" class="logo-img" />
+  </div>
+
+  <div class="balance-avatar-group">
+    <div class="balance-container">
+      <div class="balance-box">
+        <img src="icons/ruble-icon.png" alt="RUB" class="currency-icon">
+        <span class="balance-amount">0.00</span>
+        <span class="balance-dropdown">▼</span>
+      </div>
+      <button class="balance-add">
+        <span>+</span>
+      </button>
+    </div>
+
+    <div class="user-avatar">
+      <img src="icons/default-avatar.png" alt="User" class="avatar-img">
+    </div>
+  </div>
+</header>
+
+
+        <main class="app-main">
+            <div class="tab-content active" data-tab-content="case">
+                <div class="centered-content">
+                    <div class="games-header">
+                        <h2 class="games-title">Игры</h2>
+                        <div class="games-tabs">
+                            <button class="games-tab-button active" data-game-tab="cases">Кейсы</button>
+                            <button class="games-tab-button" data-game-tab="bonuses">Бонусы</button>
+                            <button class="games-tab-button" data-game-tab="online">Онлайн</button>
+                            <div class="games-tab-highlight"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Контент для вкладки "Кейсы" -->
+                    <div class="games-content active" data-game-content="cases">
+                        <div class="bonuses-page">
+                            <h1 class="bonuses-title">БАЗОВЫЕ КЕЙСЫ</h1>
+                            
+                            <div class="bonuses-grid">
+                                <div class="bonus-item" data-case="bronze">
+                                    <div class="bonus-icon-wrapper">
+                                        <img src="icons/beggar-icon.png" alt="Бронзовый" class="bonus-icon">
+                                    </div>
+                                    <div class="bonus-name">Бронзовый</div>
+                                    <div class="bonus-value">99<img src="icons/balance.png" class="ruble-icon black"></div>
+                                </div>
+
+                                <div class="bonus-item" data-case="silver">
+                                   <div class="bonus-icon-wrapper">
+                                        <img src="icons/beggar-icon.png" alt="Бронзовый" class="bonus-icon">
+                                    </div>
+                                    <div class="bonus-name">Серебрянный</div>
+                                    <div class="bonus-value">499<img src="icons/balance.png" class="ruble-icon black"></div>
+                                </div>
+
+                                <div class="bonus-item" data-case="gold">
+                                    <div class="bonus-icon-wrapper">
+                                        <img src="icons/beggar-icon.png" alt="Бронзовый" class="bonus-icon">
+                                    </div>
+                                    <div class="bonus-name">Золотой</div>
+                                    <div class="bonus-value">2490<img src="icons/balance.png" class="ruble-icon black"></div>
+                                </div>
+                                
+                                <div class="bonus-item" data-case="platinum">
+                                   <div class="bonus-icon-wrapper">
+                                        <img src="icons/beggar-icon.png" alt="Бронзовый" class="bonus-icon">
+                                    </div>
+                                    <div class="bonus-name">Платиновый</div>
+                                    <div class="bonus-value">4990<img src="icons/balance.png" class="ruble-icon black"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Контент для вкладки открытого кейса -->
+                    <div class="games-content" data-game-content="case-open">
+                        <div class="case-content">
+    <!-- Стрелка "Назад" -->
+    <div class="case-header">
+        <button class="back-button back-arrow">
+            <img src="icons/arrow-back.png" alt="Назад" class="back-icon">
+        </button>
+    </div>
+
+    <!-- Заголовок кейса -->
+    <h3 class="case-title" id="rouletteCaseTitle">Бронзовый кейс</h3>
+
+    <!-- Блок с иконкой кейса -->
+    <div class="case-image-container">
+        <img src="icons/beggar-icon.png" alt="Кейс" class="case-image">
+    </div>
+
+    <!-- Кнопки открытия -->
+    
+
+    <!-- Рулетка -->
+    <div class="roulette-wrapper hidden" id="rouletteWrapper">
+        <div class="roulette-track" id="rouletteTrack"></div>
+        <div class="roulette-indicator"></div>
+    </div>
+
+<div class="case-buttons">
+        <button class="case-button open-normal">
+            Открыть кейс
+            <img src="icons/open-icon.png" alt="Открыть" class="case-button-icon">
+        </button>
+        <button class="case-button open-fast">
+            Открыть быстро
+            <img src="icons/fast-icon.png" alt="Быстро" class="case-button-icon">
+        </button>
+    </div>
+
+    <!-- Содержимое кейса -->
+    <div class="case-contents">
+        <h4>СОДЕРЖИМОЕ КЕЙСА</h4>
+        <div class="items-grid">
+            <div class="case-item">
+                <img src="icons/item1.png" class="item-image">
+                <div class="item-name">1</div>
+                <div class="item-price">44000 <img src="icons/balance.png" class="ruble-icon"></div>
+            </div>
+            <div class="case-item">
+                <img src="icons/item2.png" class="item-image">
+                <div class="item-name">2</div>
+                <div class="item-price">22000 <img src="icons/balance.png" class="ruble-icon"></div>
+            </div>
+            <div class="case-item">
+                <img src="icons/item3.png" class="item-image">
+                <div class="item-name">3</div>
+                <div class="item-price">14000 <img src="icons/balance.png" class="ruble-icon"></div>
+            </div>
+            <div class="case-item">
+                <img src="icons/item4.png" class="item-image">
+                <div class="item-name">4</div>
+                <div class="item-price">7600 <img src="icons/balance.png" class="ruble-icon"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно после открытия -->
+
+                    </div>
+                    
+                    <!-- Контент для вкладки "Бонусы" -->
+                    <div class="games-content" data-game-content="bonuses">
+                        <div class="bonuses-page">
+                            <h1 class="bonuses-title">КЕЙСЫ ЗА ПОПОЛНЕНИЕ</h1>
+                            
+                            <div class="bonuses-grid">
+                                <div class="bonus-item">
+                                    <img src="icons/bronze.png"  class="bonus-icon">
+                                    <div class="bonus-name">Бронзовый</div>
+                                    <div class="bonus-value">99<img src="icons/balance.png" class="ruble-icon"></div>
+                                </div>
+
+                                <div class="bonus-item">
+                                    <img src="icons/bronze.png"  class="bonus-icon">
+                                    <div class="bonus-name">Серебрянный</div>
+                                    <div class="bonus-value">499<img src="icons/balance.png" class="ruble-icon"></div>
+                                </div>
+
+                                <div class="bonus-item">
+                                    <img src="icons/gold.png"  class="bonus-icon">
+                                    <div class="bonus-name">Золотой</div>
+                                    <div class="bonus-value">2490<img src="icons/balance.png" class="ruble-icon"></div>
+                                </div>
+                                
+                                <div class="bonus-item">
+                                    <img src="icons/platina.png"  class="bonus-icon">
+                                    <div class="bonus-name">Платиновый</div>
+                                    <div class="bonus-value">4990<img src="icons/balance.png" class="ruble-icon"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Контент для вкладки "Онлайн" -->
+                    <div class="games-content" data-game-content="online">
+                        <div class="game-content-large">Контент для онлайн игр</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab-content="trade">
+                <div class="centered-content">
+                    <div class="stats">Раздел trade в разработке</div>
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab-content="friends">
+                <div class="centered-content">
+                    <div class="friends-header">
+                        <h2 class="friends-title">Друзья</h2>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab-content="raffles">
+                <div class="centered-content">
+                    <div class="raffles-header">
+                        <h2 class="raffles-title">Розыгрыши</h2>
+                        <div class="raffles-tabs">
+                            <button class="raffles-tab-button active" data-raffle-tab="paid">За билеты</button>
+                            <button class="raffles-tab-button" data-raffle-tab="free">Бесплатные</button>
+                            <div class="raffles-tab-highlight"></div>
+                        </div>
+                    </div>
+                    <div class="raffles-content active" data-raffle-content="paid">
+                        Контент для розыгрышей за билеты
+                    </div>
+                    <div class="raffles-content" data-raffle-content="free">
+                        Контент для бесплатных розыгрышей
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" data-tab-content="profile">
+                <div class="centered-content">
+                    <div class="profile-content">
+                         <img src="" alt="Profile" class="profile-avatar">
+                         <div class="profile-username"></div>
+                        <div class="profile-userid">#</div>
+                        <div class="profile-divider"></div>
+                        
+                        <div class="profile-stats">
+                            <!-- Вывод -->
+                            <div class="stat-column">
+                                <div class="stat-title">Выведено</div>
+                                <div class="stat-value">1,250</div>
+                                <div class="stat-subtext">Выведено за все время</div>
+                            </div>
+                            
+                            <!-- Медали -->
+                            <div class="stat-column">
+                                <div class="stat-title">Медали</div>
+                                <div class="medals-container">
+                                    <img src="icons/gold-medal.png" alt="Gold" class="medal-icon">
+                                    <img src="icons/silver-medal.png" alt="Silver" class="medal-icon">
+                                    <img src="icons/bronze-medal.png" alt="Silver" class="medal-icon">
+                                </div>
+                            </div>
+                            
+                            <!-- Любимая игра -->
+                            <div class="stat-column">
+                                <div class="stat-title">Любимая игра</div>
+                                <div class="game-container">
+                                    <img src="icons/dice.png" alt="Dice" class="game-icon">
+                                    <div class="game-name">Dice</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <div class="tab-container">
+                <div class="tab-bar">
+                    <button class="tab-button" data-tab="raffles">
+                        <img src="icons/gift.png" alt="Raffles" class="tab-icon">
+                        <span class="tab-label">Розыгрыши</span>
+                    </button>
+                    <button class="tab-button" data-tab="trade">
+                        <img src="icons/123.png" alt="Trade" class="tab-icon">
+                        <span class="tab-label">Trade</span>
+                    </button>
+                    <button class="tab-button active" data-tab="case">
+                        <img src="icons/game.png" alt="Case" class="tab-icon">
+                        <span class="tab-label">Игры</span>
+                    </button>
+                    <button class="tab-button" data-tab="friends">
+                        <img src="icons/friends.png" alt="Friends" class="tab-icon">
+                        <span class="tab-label">Друзья</span>
+                    </button>
+                    <button class="tab-button" data-tab="profile">
+                        <img src="icons/profile.png" alt="Profile" class="tab-icon">
+                        <span class="tab-label">Профиль</span>
+                    </button>
+                    <div class="tab-highlight"></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Модальное окно пополнения баланса -->
+<div class="bottom-slide-overlay" id="bottomSlideOverlay">
+  <div class="bottom-slide-panel" id="bottomSlidePanel">
+    <div class="bottom-slide-header">
+      <h3>Пополнение баланса</h3>
+      <button class="bottom-slide-close" id="bottomSlideClose">&times;</button>
+    </div>
+    <div class="bottom-slide-body">
+      <input type="number" placeholder="Введите сумму" class="bottom-slide-input" />
+      <button class="bottom-slide-confirm">Продолжить</button>
+    </div>
+  </div>
+</div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

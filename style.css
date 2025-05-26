@@ -1,0 +1,1678 @@
+:root {
+    --tg-bg-color: #17212b;
+    --tg-header-color: #232e3c;
+    --glass-color: rgba(43, 82, 120, 0.7);
+    --glass-hover: rgba(58, 109, 153, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: 10px;
+    --tg-text-color: #ffffff;
+    --tg-secondary-text: #7f91a4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(145deg, #1e2a38, #121a23);
+    background-attachment: fixed;
+    color: var(--tg-text-color);
+    height: 100vh;
+    width: 100vw;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+}
+ 
+
+.app-header::before,
+.app-header::after {
+    display: none !important;
+    content: none !important;
+}
+ 
+.telegram-app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    padding-top: 46px; /* Уменьшенный отступ сверху */
+    padding-bottom: 55px; /* Уменьшенный отступ снизу */
+}
+
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: #1e2a38; /* Заменили переменную на сплошной цвет */
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: none !important;
+}
+
+
+/* Общие стили для стеклянных кнопок */
+.profile-button, .connect-wallet {
+    background-color: var(--glass-color);
+    color: var(--tg-text-color);
+    border: 1px solid var(--glass-border);
+    border-radius: 11px; /* Уменьшено с 12px */
+    padding: 4px 10px; /* Уменьшено с 8px 16px */
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Уменьшено с 12px */
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    height: 36px; /* Уменьшено с 40px */
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1); /* Уменьшено с 4px 6px */
+    overflow: hidden;
+    position: relative;
+}
+
+.profile-button {
+    max-width: 160px; /* Уменьшено с 220px */
+    min-width: 110px; /* Уменьшено с 160px */
+}
+
+.connect-wallet {
+    min-width: 130px; /* Уменьшено с 160px */
+}
+
+.profile-button:hover, .connect-wallet:hover {
+    background-color: var(--glass-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Уменьшено с 6px 8px */
+}
+
+/* Эффект стекла */
+.profile-button::after, .connect-wallet::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.avatar, .icon {
+    width: 20px; /* Уменьшено с 24px */
+    height: 20px; /* Уменьшено с 24px */
+    object-fit: cover;
+}
+
+.avatar {
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px; /* Добавлен фиксированный размер */
+}
+
+.connect-wallet span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px; /* Добавлен фиксированный размер */
+}
+
+/* Остальные стили остаются без изменений */
+.app-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 100vw;
+    text-align: center;
+    padding: 0;
+}
+
+.app-footer {
+    background-color: var(--tg-header-color);
+    padding: 8px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 72px; /* Фиксированная высота */
+}
+
+.tab-container {
+    position: relative;
+    width: 100%;
+}
+
+.tab-bar {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    padding: 0 5px;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    color: var(--tg-secondary-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: color 0.5s ease;
+    position: relative;
+    z-index: 1;
+    border-radius: 8px;
+    margin: 0 2px;
+    flex: 1;
+    max-width: 72px;
+}
+
+.tab-icon {
+    width: 22px;
+    height: 22px;
+    margin-bottom: 4px;
+}
+
+.tab-label {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.tab-button.active {
+    color: var(--tg-text-color);
+}
+
+.tab-highlight {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: calc(100% - 4px);
+    width: calc(20% - 4px);
+    background-color: var(--glass-color);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--glass-border);
+    z-index: 0;
+}
+
+.tab-highlight::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.app-main {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.tab-content {
+    display: none;
+    height: 100%;
+    padding: 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.Balance {
+    background-color: rgba(100, 100, 100, 0.7);
+    color: var(--tg-text-color);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    height: 36px;
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    overflow: hidden;
+    position: relative;
+    min-width: 100px;
+    pointer-events: none;
+    cursor: default;
+
+    /* 👇 добавленные */
+    align-self: center;
+    margin: 0 !important;
+    box-shadow: none;
+}
+
+
+.Balance::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(100, 100, 100, 0.5) 0%,
+        rgba(255, 255, 255, 0) 50%
+    );
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.Balance .icon:first-child {
+    width: 16px; /* Уменьшено с 22px */
+    height: 16px; /* Уменьшено с 22px */
+    margin-left: auto;
+}
+
+
+.Balance span {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.action-button {
+    background-color: var(--glass-color);
+    color: var(--tg-text-color);
+    border: none;
+    border-radius: 18px; /* Уменьшено с 20px */
+    padding: 8px 16px; /* Уменьшено с 10px 20px */
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Уменьшено с 8px */
+    font-size: 14px; /* Уменьшено с 15px */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-button:hover {
+    background-color: var(--glass-hover);
+    transform: translateY(-1px);
+}
+
+.friends-title {
+    font-size: 18px; /* Уменьшено с 20px */
+    font-weight: bold;
+    color: var(--tg-text-color);
+    margin-bottom: 14px; /* Уменьшено с 16px */
+    text-align: center;
+    width: 100%;
+    line-height: 1.3;
+}
+
+.friends-reward-text {
+    font-size: 13px; /* Уменьшено с 14px */
+    color: var(--tg-secondary-text);
+    margin-top: 6px; /* Уменьшено с 8px */
+    line-height: 1.4;
+    text-align: center;
+}
+
+.Balance .refresh-icon {
+    width: 20px; /* Такой же размер, как у значка рубля */
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    pointer-events: auto; /* Включаем события мыши только для плюса */
+}
+
+.Balance .refresh-icon:hover {
+    transform: rotate(90deg);
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--glass-color);
+    margin-bottom: 3px;
+}
+
+.profile-username {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--tg-text-color);
+    margin-bottom: 7px;
+    text-align: center;
+}
+
+.profile-divider {
+    width: 400px;
+    height: 1px;
+    background-color: var(--glass-border);
+    margin: 16px 0;
+}
+
+.profile-userid {
+    font-size: 14px;
+    color: var(--tg-secondary-text); /* Используем серый цвет из переменных */
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: normal;
+    margin-top: 1px;
+    opacity: 0.7; /* Делаем текст более тусклым */
+}
+
+.Balance .icon:last-child {
+    width: 16px; /* Такой же размер, как у плюса */
+    height: 16px;
+    margin-right: 3px;
+}
+
+/* Стили модального окна */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--tg-header-color);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.modal-close {
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: var(--tg-secondary-text);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background-color: var(--tg-bg-color);
+  color: var(--tg-text-color);
+  font-size: 16px;
+}
+
+.modal-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confirm-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+/* Убираем стрелки у input[type=number] */
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spinners {
+  -moz-appearance: textfield;
+}
+
+/* Стили для методов оплаты */
+.payment-methods {
+  margin: 10px 0;
+}
+
+.payment-methods h4 {
+  margin-bottom: 1px;
+  font-size: 16px;
+  color: var(--tg-secondary-text);
+}
+
+.method-option {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 6px 10px; /* Еще более компактные отступы */
+  margin-bottom: 4px; /* Уменьшенный отступ между элементами */
+  height: 36px; /* Компактная высота */
+}
+
+.method-option:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.method-option.active {
+  background-color: var(--glass-color);
+  border: 1px solid var(--glass-border);
+}
+
+.method-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+.promo-group {
+  margin-top: 20px;
+}
+
+/* Стили для выпадающего списка */
+.payment-selector {
+  margin: 15px 0; /* Уменьшенный отступ */
+  position: relative;
+  width: 100%; /* Занимает всю ширину */
+
+}
+
+.selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.selector-arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.payment-methods {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--tg-header-color);
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.payment-selector.expanded .payment-methods {
+
+  display: block;
+}
+
+.payment-selector.expanded .selector-arrow {
+  transform: rotate(180deg);
+}
+
+.payment-selector.expanded .selector-header {
+  border-radius: 8px 8px 0 0;
+}
+
+/* Стили для выбранного метода */
+.selected-method {
+  display: flex;
+  align-items: center;
+  padding: 7px;
+  margin-top: 15px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.method-icon-selected {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+/* Обновленные стили для профиля */
+/* Обновленные стили для профиля */
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 16px;
+    margin-top: 30px;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 380px;
+    margin-top: 25px;
+    gap: 6px;
+}
+
+.stat-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Первый столбец (Вывод) */
+.stat-column:first-child {
+    min-width: 120px;
+}
+
+.stat-column:first-child .stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4CAF50;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+    margin-top: 5px;
+}
+
+.stat-column:first-child .stat-value::after {
+    content: '₽';
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.stat-column:first-child .stat-subtext {
+    font-size: 11px;
+    color: var(--tg-secondary-text);
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+/* Второй столбец (Медали) */
+.stat-column:nth-child(2) {
+    min-width: 120px;
+}
+
+.medals-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.medal-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    margin-top: 8px;
+}
+
+/* Третий столбец (Любимая игра) */
+.stat-column:last-child {
+    min-width: 120px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.game-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+    margin-top: 9px;
+}
+
+
+.game-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tg-text-color);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin-top: 1px;
+}
+
+.stat-column:last-child .stat-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #FFFFFF;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+
+/* Стили для вкладки Розыгрыши */
+.raffles-header {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Заголовок розыгрыш */
+.raffles-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--tg-text-color);
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+}
+
+.raffles-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+/* Стили для вкладок внутри розыгрышей */
+.raffles-tabs {
+    position: relative;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 4px;
+    margin: 15px 0;
+    width: 100%;
+    max-width: 300px;
+    min-height: 40px;
+}
+
+.raffles-tab-button {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    color: var(--tg-secondary-text);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.raffles-tab-button:hover {
+    color: var(--tg-text-color);
+}
+
+.raffles-tab-button.active {
+    color: var(--tg-text-color);
+}
+
+.raffles-tab-highlight {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: calc(100% - 8px);
+    width: calc(50% - 8px);
+    background-color: var(--glass-color);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--glass-border);
+    z-index: 0;
+}
+
+.raffles-content {
+    display: none;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.raffles-content.active {
+    display: block;
+}
+
+/* Стили для вкладки Игры */
+/* Альтернативный вариант - использование тех же стилей что и для розыгрышей */
+.games-header {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+/* Заголовок игры */
+.games-title {
+    font-size: 34px;
+    font-weight: bold;
+    color: var(--tg-text-color);
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+}
+
+.games-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+/* Общие стили для табов в играх и розыгрышах */
+.games-tabs, .raffles-tabs {
+    position: relative;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 3px;
+    margin: 12px auto;
+    width: 90%;
+    max-width: 300px;
+}
+
+.games-tab-button, .raffles-tab-button {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    color: var(--tg-secondary-text);
+    font-size: 15px;
+    font-weight: 550;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    position: relative;
+    z-index: 1;
+    border-radius: 7px;
+    width: 300px;
+}
+
+.games-tab-button:hover, .raffles-tab-button:hover {
+    color: var(--tg-text-color);
+}
+
+.games-tab-button.active, .raffles-tab-button.active {
+    color: var(--tg-text-color);
+}
+
+.games-tab-highlight, .raffles-tab-highlight {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    height: calc(100% - 6px);
+    width: calc(50% - 6px);
+    background-color: var(--glass-color);
+    border-radius: 7px;
+    transition: all 0.25s cubic-bezier(0.33, 1, 0.68, 1);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--glass-border);
+    z-index: 0;
+}
+
+.games-content, .raffles-content {
+    display: none;
+    width: 100%;
+    max-width: 100vw;
+    text-align: center;
+    padding: 10px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.games-content.active, .raffles-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.games-tab-button:nth-child(1) {
+    order: 1; /* Кейсы */
+}
+.games-tab-button:nth-child(2) {
+    order: 2; /* Бонусы */
+}
+.games-tab-button:nth-child(3) {
+    order: 3; /* Онлайн */
+}
+
+.games-tab-highlight {
+    width: calc(33.33% - 6px); /* Ширина для 3 кнопок */
+}
+
+/* Обновленные стили для бонусных кейсов */
+/* Новые стили для бонусных кейсов */
+.bonuses-page {
+    width: auto;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем содержимое */
+}
+
+.bonuses-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--tg-text-color);
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    width: 100%; /* Занимает всю ширину контейнера */
+}
+
+.bonuses-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 25%;
+    right: 25%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.bonuses-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 25px;
+    width:auto; /* Занимает всю доступную ширину */
+    overflow: visible;
+}
+
+.bonus-item {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 230px;
+    width: 150px;
+    aspect-ratio: 1 / 0.9;
+}
+
+
+
+/* Иконка кейса */
+.bonus-icon {
+    width: 130px; /* Немного уменьшил размер */
+    height: 130px;
+    object-fit: contain;
+    margin-bottom: 4px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.4), transparent 72%);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.bonus-icon-wrapper:hover .bonus-icon {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 12px rgba(0, 191, 255, 0.5));
+}
+
+.bonus-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--tg-text-color);
+    margin-bottom: 10px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.bonus-value {
+    background: rgba(30, 144, 255, 0.6);
+    color: var(--tg-text-color);
+    padding: 7px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px; /* уменьшено с 8px */
+    font-size: 14px;
+    border: none;
+    cursor: default;
+    width: 65%;
+    max-width: 200px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+
+
+/* Стили для заголовка "Друзья" */
+.friends-header {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.friends-title {
+    font-size: 34px;
+    font-weight: bold;
+    color: var(--tg-text-color);
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+}
+
+.friends-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+}
+
+.friends-reward-text {
+    font-size: 16px;
+    color: var(--tg-secondary-text);
+    margin-top: 10px;
+    line-height: 1.4;
+    text-align: center;
+    max-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bonus-price {
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFD700;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.1));
+    padding: 8px 16px 8px 32px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+    width: fit-content;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.bonus-price::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: brightness(1.2);
+}
+
+.ruble-icon {
+    width: 14px;
+    height: 14px;
+    margin-left: 4px;
+    filter: brightness(0) saturate(100%) invert(89%) sepia(70%) saturate(642%) hue-rotate(329deg) brightness(104%) contrast(101%);
+    display: none;
+}
+
+.ruble-icon.black {
+    width: 14px;
+    height: 14px;
+    margin-left: 4px;
+    filter: none;
+    display: inline-block;
+}
+
+/* Стили для модального окна кейса */
+/* Стили для вкладки открытого кейса */
+.case-content {
+    width: 100%;
+    max-width: none; /* 🔥 убираем ограничение */
+    margin: 0 auto;
+    padding: 0;
+}
+
+.case-header {
+    position: relative;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
+    padding-top: 10px;
+}
+
+
+.case-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    padding: 15px 0;
+}
+
+.case-image-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.case-image-container::before {
+    content: "";
+    position: absolute;
+    bottom: -65px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.6), rgba(0, 191, 255, 0));
+    filter: blur(65px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+.case-image {
+    width: 230px;
+    height: 230px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+
+.case-buttons {
+    display: flex;
+    flex-direction: column; /* Кнопки друг над другом */
+    gap: 10px;
+    margin: 20px 0;
+    padding: 10px 0;
+    justify-content: center;
+    align-items: center; /* Центрируем кнопки */
+    width: 100%;
+}
+
+.case-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 80%; /* Ширина кнопок */
+    max-width: 200px; /* Максимальная ширина */
+}
+
+.open-normal {
+    background: rgba(30, 144, 255, 0.6) ;
+    color: var(--tg-text-color);
+}
+
+.open-fast {
+    background: rgba(30, 144, 255, 0.6) ;
+    color: var(--tg-text-color);
+}
+
+.case-contents h4 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: var(--tg-text-color);
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    justify-content: center;
+}
+
+.case-item {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 16px 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02), 0 2px 6px rgba(0,0,0,0.15);
+    transition: all 0.25s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.case-item .ruble-icon {
+    width: 16px;
+    height: 16px;
+    filter: brightness(1.2) saturate(120%);
+    margin-left: 2px;
+}
+
+.case-item .item-price {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.05);
+    padding: 6px 10px;
+    border-radius: 10px;
+}
+
+.case-item .item-price::before {
+    content: '⭐';
+    color: #FFD700;
+    font-size: 16px;
+    margin-right: 3px;
+}
+
+.case-item .item-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 2px;
+    line-height: 1.2;
+}
+
+.case-item .item-price::after {
+    content: ' 💎';
+    font-size: 16px;
+    color: #00BFFF;
+    margin-left: 3px;
+}
+
+.case-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.case-item .item-image {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.case-button-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.case-contents h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.case-contents h4::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+}
+
+/* Стили для стрелки "Назад" в левом верхнем углу */
+.back-arrow {
+    position: fixed;
+    left: 15px;
+    top: 80px;
+    z-index: 1000;
+    background: rgba(43, 82, 120, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.back-arrow:hover {
+    background: rgba(58, 109, 153, 0.8);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+
+.back-arrow .back-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+}
+
+.back-arrow.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.roulette-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  width: 100vw; /* 🔥 во весь экран */
+  padding: 0;
+  border-top: 2px solid rgba(255, 255, 255, 0.1); /* 🔥 верхняя линия */
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1); /* 🔥 нижняя линия */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+
+
+
+.roulette-wrapper.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Анимация "наведения" на выигрышный предмет */
+.roulette-item.highlighted {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 2;
+}
+
+
+.roulette-track {
+  display: flex;
+  transition: transform 6s cubic-bezier(0.15, 0.85, 0.35, 1.25);
+  padding: 0 40px; /* отступы слева/справа */
+  gap: 16px;
+  width: max-content;
+   /* 🔥 чтобы лента не ограничивалась */
+}
+
+.roulette-item {
+  background: rgba(255, 255, 255, 0.05); /* 🔥 подложка — полупрозрачная */
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  text-align: center;
+  width: 130px;
+  flex-shrink: 0;
+  color: white;
+  font-size: 14px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+
+
+.roulette-item img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 6px;
+}
+
+
+.roulette-indicator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 30px;
+  margin-left: -15px;
+  background: rgba(129, 129, 129, 1.0);
+  width: 1px;
+  background-size: contain;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.case-button.keep-item,
+.case-button.sell-item {
+  background-color: rgba(50, 100, 200, 0.6);
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.case-button.keep-item:hover,
+.case-button.sell-item:hover {
+  background-color: rgba(70, 120, 220, 0.8);
+}
+
+
+.roulette-item.hover-effect {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+  z-index: 2;
+}
+
+/* стили верхнего меню */
+.custom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #253445;
+  padding: 6px 12px;
+  height: 46px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.logo-container {
+  flex: 0 0 auto;
+}
+
+.logo-img {
+  height: 24px;
+  object-fit: contain;
+}
+
+.balance-avatar-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.balance-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.balance-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0 4px; /* Убираем лишние отступы, можно даже сделать padding: 0 */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Выровнять всё по центру */
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  min-width: 90px;
+  height: 28px;
+  gap: 3px; /* Управляет расстоянием между иконкой, текстом и стрелкой */
+}
+
+
+.currency-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+}
+
+.balance-dropdown {
+  margin-left: 4px;
+  opacity: 0.5;
+  font-size: 12px;
+}
+
+.balance-add {
+  background-color: rgba(30, 144, 255, 0.6);
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  padding: 0;
+  transition: background-color 0.3s ease;
+}
+
+.balance-add:hover {
+  background-color: rgba(30, 144, 255, 0.8);
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* пополнение балика */
+
+.bottom-slide-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.bottom-slide-overlay.show {
+    display: flex;
+}
+
+.bottom-slide-panel {
+    width: 100%;
+    background-color: var(--tg-header-color);
+    color: var(--tg-text-color);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+    max-height: 80vh;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+
+.bottom-slide-overlay.show .bottom-slide-panel {
+    transform: translateY(0);
+}
+
+.bottom-slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom-slide-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--tg-text-color);
+    cursor: pointer;
+}
+
+.bottom-slide-body {
+    margin-top: 15px;
+}
+
+.bottom-slide-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    background-color: var(--tg-bg-color);
+    color: var(--tg-text-color);
+    margin-bottom: 10px;
+}
+
+.bottom-slide-confirm {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--glass-color);
+    color: var(--tg-text-color);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.bottom-slide-confirm:hover {
+    background-color: var(--glass-hover);
+}
+
+.friends-subtext {
+    font-size: 14px;
+    color: var(--tg-secondary-text);
+    opacity: 0.7;
+    margin-top: 4px;
+    text-align: center;
+}
+
